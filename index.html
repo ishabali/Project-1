@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Project 1</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+</head>
+
+<body>
+    <div class="container-sm jumbotron jumbotron-fluid">
+        <h1 class="text-center">Dream Vacation Spot</h1>
+        <hr>
+        <div class="input-group">
+            <form>
+                <p>Where do you want to go? </p>
+                <div class="form-group">
+                    <input type="text" class="form-control" id="len1" 
+                        placeholder="Location (i.e. Las Vegas, Nevada)" name="text1">
+                </div>
+                <p>What are you looking for? Check all that apply</p>
+                <div class="form-check">
+                    <label class="form-check-label" for="check1">
+                        <input type="checkbox" class="form-check-input" id="check1" name="option1" value="something"
+                            checked>50-55 °F
+                    </label>
+                </div>
+                <div class="form-check">
+                    <label class="form-check-label" for="check2">
+                        <input type="checkbox" class="form-check-input" id="check2" name="option2"
+                            value="something">56-60 °F
+                    </label>
+                </div>
+                <div class="form-check">
+                    <label class="form-check-label">
+                        <input type="checkbox" class="form-check-input" id="check3" name="option3"
+                            value="something">61-65 °F
+                    </label>
+                </div>
+                <div class="form-check">
+                    <label class="form-check-label">
+                        <input type="checkbox" class="form-check-input" id="check4" name="option4" value="something">65+
+                        °F
+                    </label>
+                </div>
+                <button id="go-weather"type="submit" class="btn btn-primary">Go</button>
+                <hr>
+                <div class="weather-api">PlaceHolder for Weather</div>
+                <hr>
+                <div class="trip-advisor-api">PlaceHolder for Location</div>
+
+            </form>
+        </div>
+
+
+
+
+        <script src="https://code.jquery.com/jquery.js"></script>
+        <script src="project.js"></script>
+</body> 
+
+</html>
