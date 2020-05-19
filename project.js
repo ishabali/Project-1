@@ -6,11 +6,12 @@ $(document).ready(function () {
         $(".card-deck").empty();
         $(".lead").empty();
         $(".display-4").empty();
-        var location = $('#input').val();
+        $(".trip-advisor-api").empty();
+        var location = $('#input').val().toUpperCase();
+        console.log(location)
         searchHistory.push(location);
         getWeatherData(location);
-        getTripAdvisorData(location);  //------
-
+        getTripAdvisorData(location);  
         localStorage.setItem('cities', JSON.stringify(searchHistory));
     })
     var getWeatherData = function (location) {
@@ -35,7 +36,6 @@ $(document).ready(function () {
             $('.lead').append('<br>Windspeed: ' + windspeed + "MPH");
             getFiveDayForecast(lat, lon);
         })
-
     }
     var getFiveDayForecast = function (lat, lon) {
         var queryURL2 = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&appid=${APIKey}`
@@ -49,11 +49,11 @@ $(document).ready(function () {
                 var cardIcon = response.daily[i].weather[0].icon
                 var cardTemp = Math.floor(((response.daily[i].temp.day) - 273.15) * 1.80 + 32);
                 var cardHumidity = response.daily[i].humidity;
-
                 $('.card-deck').append(`<div class='card'>
              <div class='card-body'>
                  <h6 class='card-title'>${nextDay}</h6>
-                 <p class='card-text'id ="card${i}"> <img src='http://openweathermap.org/img/wn/${cardIcon}.png' class="img-fluid" alt="Responsive image"> <br>${cardTemp}°F <br> ${cardHumidity}% </p>
+                 <p class='card-text'id ="card${i}"> 
+                 <img src='http://openweathermap.org/img/wn/${cardIcon}.png' class="img-fluid" alt="Responsive image"> <br>${cardTemp}°F <br> ${cardHumidity}% </p>
              </div>`);
             }
             var uvi = response.daily[0].uvi
@@ -80,6 +80,7 @@ $(document).ready(function () {
         if (searchHistory !== null) {
             var lastLocation = searchHistory[searchHistory.length - 1]
             getWeatherData(lastLocation);
+   //         getTripAdvisorData(lastlocation);
         }
     }
     search();
@@ -103,12 +104,11 @@ var getTripAdvisorData = function (location) {
   //      console.log(response);
         var i = 0;
         for (var i = 0; i < response.data.length; i++) {
-           if (response.data[i].result_type === "geos" && response.data[i].result_object.name === location ) {      
+           if (response.data[i].result_type === "geos" && response.data[i].result_object.name.toUpperCase() === location ) {      
                 console.log(response);
-                console.log(response.data[i].result_object.name);
+                console.log(response.data[i].result_object.name.toUpperCase());
                 console.log(response.data[i].result_object.location_id);
                 // alert(response.data[i].result_object.location_id);
-                var city2 = response.data[i].result_object.name;
                 var cityId = response.data[i].result_object.location_id;
                getTripAdvisorData2(cityId);           
             }
@@ -147,27 +147,42 @@ var getTripAdvisorData = function (location) {
                         console.log(response.data[randomAttractions]);
                         var imageURL = response.data[randomAttractions].photo.images.medium.url;
                         var imageWidth = response.data[randomAttractions].photo.images.medium.width;
-                        $('.trip-advisor-api').append('<br> Attraction Name: ' + response.data[randomAttractions].name);
-                        $('.trip-advisor-api').append('<br>Description: ' + response.data[randomAttractions].description);
-                        $('.trip-advisor-api').append('<br>Rating: ' + response.data[randomAttractions].rating);
-                        $('.trip-advisor-api').append('<br>URL: ' + response.data[randomAttractions].website);
-                        $('.trip-advisor-api').append(`<br><img src="${imageURL}" class="img-fluid" alt="Responsive image"></img width="${imageWidth}">`);                   
-                        $('.trip-advisor-api').append('<br> ------------------ ');
+                        // $('.trip-advisor-api').append('<br> Attraction Name: ' + response.data[randomAttractions].name);
+                        // $('.trip-advisor-api').append('<br>Description: ' + response.data[randomAttractions].description);
+                        // $('.trip-advisor-api').append('<br>Rating: ' + response.data[randomAttractions].rating);
+                        // $('.trip-advisor-api').append('<br>URL: ' + response.data[randomAttractions].website);
+                        // $('.trip-advisor-api').append('<br> ------------------ ');
+
+                            $('.card-deck2').append(`<div class='card'>
+                                <div class='card-body'>
+                                <h2 class='card-title' style="text-decoration: underline; color: red" >${response.data[randomAttractions].name}<h5> Rating: ${response.data[randomAttractions].rating}</h5></h2>
+                                <p class='card-text'id ="card">
+                                <img src="${imageURL}" class="img-fluid" alt="Responsive image">
+                                <hr>
+                                ${response.data[randomAttractions].description}
+                                <br>
+                                <hr>
+                                <a href="${response.data[randomAttractions].website}">${response.data[randomAttractions].website}</a></p>
+                                <hr>
+
+                            </div>`);
+                        
                     }  
                 }
                 iStart++;
             }
         });
-    }
-
+}
 //--------------------------------------------------------
-
     $(document).on('click', '#button', function () {
         $(".card-deck").empty();
         $(".lead").empty();
         $(".display-4").empty();
-        newLocation = $(this).attr("value");
+        $(".trip-advisor-api").empty();
+        newLocation = $(this).attr("value").toUpperCase();
+        console.log(newLocation)
         getWeatherData(newLocation);
+       getTripAdvisorData(newLocation)
     });
+});             
 
-});
