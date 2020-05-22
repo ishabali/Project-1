@@ -192,6 +192,7 @@ $(document).ready(function () {
         getWeatherData(newLocation);
         getTripAdvisorData(newLocation)
     });
+<<<<<<< HEAD
 });
 
 //if the user inputs a number we are looking to give an error message and modal
@@ -234,3 +235,6 @@ $(document).ready(function () {
 //         }
 //         else {
 //             return true
+=======
+});
+>>>>>>> master
