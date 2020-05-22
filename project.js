@@ -253,16 +253,5 @@ $(document).ready(function () {
         //                     <div class='card-body'>
         //                     <h2 class='card-title' style="text-decoration: underline; color: red" >${response.data[randomAttractions].name}<h5> Rating: ${response.data[randomAttractions].rating}</h5></h2>
         //                     <p class='card-text'id ="card">
-        //                     <img src="${imageURL}" class="img-fluid" alt="Responsive image">
-        //                     <hr>
-        //                     ${response.data[randomAttractions].description}
-        //                     <br>
-        //                     <hr>
-        //                     <a href="${response.data[randomAttractions].website}">${response.data[randomAttractions].website}</a></p>
-        //                     <hr>
-        //                 </div>`);
-        //             }
-        //         }
-        //         iStart++;
-        //     }
+        //                     <img src="${imageURL}" class="img-fluid" alt="Responsiv
 //--------------------------------------------------
