@@ -234,24 +234,3 @@ $(document).ready(function () {
 //         }
 //         else {
 //             return true
-//         };
-//     }
-// }
-//------------------------------------------------------
-//------------------------------------------------------------------------------------
-//var iStart = 0; 
-// for (var i = 0; i < 10; i++) {
-        //    for (x of response.data) {
-        //         if (iStart < 10) {
-        //             var randomAttractions = Math.floor(Math.random() * response.data.length);
-        //             //random number without duplication
-        //             if (response.data[randomAttractions].name !== undefined) {
-        //                 console.log(response.data[randomAttractions]);
-        //                 var imageURL = response.data[randomAttractions].photo.images.medium.url;
-        //                 var imageWidth = response.data[randomAttractions].photo.images.medium.width;
-        //                 $('.card-deck2').append(`<div class='card'>
-        //                     <div class='card-body'>
-        //                     <h2 class='card-title' style="text-decoration: underline; color: red" >${response.data[randomAttractions].name}<h5> Rating: ${response.data[randomAttractions].rating}</h5></h2>
-        //                     <p class='card-text'id ="card">
-        //                     <img src="${imageURL}" class="img-fluid" alt="Responsiv
-//--------------------------------------------------
