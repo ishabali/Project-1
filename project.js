@@ -7,20 +7,20 @@ $(document).ready(function () {
         $(".display-4").empty();
         $(".card-deck").empty();
         $(".card-deck2").empty();
+        //var location = localStorage.getItem('cities');
         var location = $('#input').val().toUpperCase();
         console.log(location);
         //if the user inputs a number we are looking to give an error message and modal
-        //if(checkInput(location) = true){
-            searchHistory.push(location);
-            getWeatherData(location);
-            getTripAdvisorData(location);
-            localStorage.setItem('cities', JSON.stringify(searchHistory));
-            var textInputElement = document.querySelector("#input");
-            textInputElement.value = "";
-        //}
+        searchHistory.push(location);
+        console.log(searchHistory);
+        getWeatherData(location);
+        getTripAdvisorData(location);
+        localStorage.setItem('cities', JSON.stringify(searchHistory));
+        var textInputElement = document.querySelector("#input");
+        textInputElement.value = "";      
     })
     var getWeatherData = function (location) {
-        var currentDay = moment().format('dddd, MMMM Do');
+        var currentDay = moment().format('dddd, MMMM Do');      
         var queryURL = `https://api.openweathermap.org/data/2.5/weather?q=${location}&appid=${APIKey}`;
         $.ajax({
             url: queryURL,
@@ -40,7 +40,10 @@ $(document).ready(function () {
             $('.lead').append('<br>Humidity: ' + humidity + "%");
             $('.lead').append('<br>Windspeed: ' + windspeed + "MPH");
             getFiveDayForecast(lat, lon);
-        })
+        }).fail(function (data) {
+            console.log( "Ajax failed: " + data['responseText'] );  
+   //        alert("Weather Data Not Found!");   
+      })
     }
     var getFiveDayForecast = function (lat, lon) {
         var queryURL2 = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&appid=${APIKey}`
@@ -123,7 +126,10 @@ $(document).ready(function () {
                 }
             }
             //$('.trip-advisor-api').append(`<br><img src="${imageURL}" class="img-fluid" alt="Responsive image"></img width="${imageWidth}">`);
-        });
+        }).fail(function (data) {
+            console.log( "Ajax Tripadvisor1 failed - Location Not Found!: " + location);  
+            alert("Attractions Not Found!");   
+      });
     }
     //------------------------------------------------------------------------
     // Trip Advisor
@@ -178,7 +184,10 @@ $(document).ready(function () {
                     iEnd++; 
                 }
             }
-        });
+        }).fail(function (data) {
+            console.log( "Ajax Tripadvisor2 failed - CityId Not Found!: " + cityId);  
+            alert("Attractions Not Found!");   
+      });
     }
     search();
     //--------------------------------------------------------
@@ -192,49 +201,4 @@ $(document).ready(function () {
         getWeatherData(newLocation);
         getTripAdvisorData(newLocation)
     });
-<<<<<<< HEAD
 });
-
-//if the user inputs a number we are looking to give an error message and modal
-//error throwing to terminate array being pushed into and present the modal
-//error catching frm API
-//-----------------------------------------------------------------
-    // $('.trip-advisor-api').append('<br> Attraction Name: ' + response.data[randomAttractions].name);
-    // $('.trip-advisor-api').append('<br>Description: ' + response.data[randomAttractions].description);
-    // $('.trip-advisor-api').append('<br>Rating: ' + response.data[randomAttractions].rating);
-    // $('.trip-advisor-api').append('<br>URL: ' + response.data[randomAttractions].website);
-    // $('.trip-advisor-api').append('<br> ------------------ ');
-//-----------------------------------------------------------------------------
-        // create a copy of the array
-    //        var newArray = [];
-    //        var imageArray = [];
-    //   debugger;
-    //         for(var i=0; i<response.data.length; i++){
-    //             newArray.push(response.data[i])
-    //         }
-    //         // then, each time pull from that array and remove the one you use
-    //         for (var i =0; i < 10; i++)
-    //         {
-    //             if(newArray.length>0) {
-    //                 var index = Math.floor(Math.random() * newArray.length)
-    //                 var randomImage = newArray[index];
-    //                 newArray.splice(index, 1);
-    //             }
-    //         }
-    //         console.log(newArray);
- //------------------------------------------------------------------------------ 
- // "x-rapidapi-key": "83c24764bamsh4ab0e0175aae739p1180b7jsn62d3645b374e"  
- //--------------------------------------------------------------------------------
- // var checkInput = function(location){
-//     var checkForNumbers = ["0","1","2","3","4","5","6","7","8","9"];
-//     for (var i = 0; i < checkForNumbers.length; i++){
-//         var check = location.includes(checkForNumbers[i]);
-//         if(check === true){
-//             alert("Error");
-//             return false;
-//         }
-//         else {
-//             return true
-=======
-});
->>>>>>> master
