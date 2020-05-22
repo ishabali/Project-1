@@ -9,9 +9,7 @@ $(document).ready(function () {
         $(".card-deck2").empty();
         var location = $('#input').val().toUpperCase();
         console.log(location);
-
         //if the user inputs a number we are looking to give an error message and modal
-
         //if(checkInput(location) = true){
             searchHistory.push(location);
             getWeatherData(location);
@@ -20,8 +18,6 @@ $(document).ready(function () {
             var textInputElement = document.querySelector("#input");
             textInputElement.value = "";
         //}
-
-
     })
     var getWeatherData = function (location) {
         var currentDay = moment().format('dddd, MMMM Do');
@@ -105,7 +101,7 @@ $(document).ready(function () {
             "headers": {
                 'Access-Control-Allow-Origin': '*',
                 "x-rapidapi-host": "tripadvisor1.p.rapidapi.com",
-                "x-rapidapi-key": "83c24764bamsh4ab0e0175aae739p1180b7jsn62d3645b374e"
+                "x-rapidapi-key": "363c7fbecfmshcbe4cfd3ee41b5fp142feajsn760531d33ab1"
             }
         }
         $.ajax(settings).done(function (response) {
@@ -118,6 +114,7 @@ $(document).ready(function () {
                     console.log(response.data[i].result_object.location_id);
                     // alert(response.data[i].result_object.location_id);
                     var cityId = response.data[i].result_object.location_id;
+                    console.log("cityId: ",cityId);
                     getTripAdvisorData2(cityId);
                 }
                 else {
@@ -137,6 +134,7 @@ $(document).ready(function () {
             "crossDomain": true,
             "cors": true,
             "url": `https://tripadvisor1.p.rapidapi.com/attractions/list?lang=en_US&currency=USD&sort=recommended&lunit=km&location_id=${cityId}`,
+//            "url": `https://tripadvisor1.p.rapidapi.com/attractions/list?lang=en_US&currency=USD&sort=recommended&lunit=km&location_id=42139`,
             "method": "GET",
             "headers": {
                 'Access-Control-Allow-Origin': '*',
@@ -146,59 +144,43 @@ $(document).ready(function () {
         }
         $.ajax(settings).done(function (response) {
             console.log(response);
-            var iStart = 0;
-            // for (var i = 0; i < 10; i++) {
-            for (x of response.data) {
-                if (iStart < 10) {
-                    var randomAttractions = Math.floor(Math.random() * response.data.length);
-                    //random number without duplication
-                    if (response.data[randomAttractions].name !== undefined) {
-                        console.log(response.data[randomAttractions]);
-                        var imageURL = response.data[randomAttractions].photo.images.medium.url;
-                        var imageWidth = response.data[randomAttractions].photo.images.medium.width;
-                        // $('.trip-advisor-api').append('<br> Attraction Name: ' + response.data[randomAttractions].name);
-                        // $('.trip-advisor-api').append('<br>Description: ' + response.data[randomAttractions].description);
-                        // $('.trip-advisor-api').append('<br>Rating: ' + response.data[randomAttractions].rating);
-                        // $('.trip-advisor-api').append('<br>URL: ' + response.data[randomAttractions].website);
-                        // $('.trip-advisor-api').append('<br> ------------------ ');
-
-                        $('.card-deck2').append(`<div class='card'>
-                                <div class='card-body'>
-                                <h2 class='card-title' style="text-decoration: underline; color: red" >${response.data[randomAttractions].name}<h5> Rating: ${response.data[randomAttractions].rating}</h5></h2>
-                                <p class='card-text'id ="card">
-                                <img src="${imageURL}" class="img-fluid" alt="Responsive image">
-                                <hr>
-                                ${response.data[randomAttractions].description}
-                                <br>
-                                <hr>
-                                <a href="${response.data[randomAttractions].website}">${response.data[randomAttractions].website}</a></p>
-                                <hr>
-
-                            </div>`);
-
-                    }
+            var lengthResponse = response.data.length;
+            console.log(lengthResponse);
+            //random number array without duplication
+            var randomArray = randoSequence(lengthResponse-1);
+            console.log(randomArray);
+            if (lengthResponse < 10){
+                var iEnd = lengthResponse;
+            }
+            else {
+                var iEnd = 10;
+            }
+            for (var i = 0; i < iEnd; i++) {
+                var randomAttractions = randomArray[i];  
+                if (response.data[randomAttractions].name !== undefined) {
+                    console.log(response.data[randomAttractions]);
+                    var imageURL = response.data[randomAttractions].photo.images.medium.url;
+                    var imageWidth = response.data[randomAttractions].photo.images.medium.width;
+                    $('.card-deck2').append(`<div class='card'>
+                        <div class='card-body'>
+                        <h2 class='card-title' style="text-decoration: underline; color: red" >${response.data[randomAttractions].name}<h5> Rating: ${response.data[randomAttractions].rating}</h5></h2>
+                        <p class='card-text'id ="card">
+                        <img src="${imageURL}" class="img-fluid" alt="Responsive image">
+                        <hr>
+                        ${response.data[randomAttractions].description}
+                        <br>
+                        <hr>
+                        <a href="${response.data[randomAttractions].website}">${response.data[randomAttractions].website}</a></p>
+                        <hr>
+                    </div>`);
                 }
-                iStart++;
+                else{
+                    iEnd++; 
+                }
             }
         });
     }
-// var checkInput = function(location){
-//     var checkForNumbers = ["0","1","2","3","4","5","6","7","8","9"];
-//     for (var i = 0; i < checkForNumbers.length; i++){
-//         var check = location.includes(checkForNumbers[i]);
-//         if(check === true){
-//             alert("Error");
-//             return false;
-//         }
-//         else {
-//             return true
-//         };
-
-//     }
-
-// }
     search();
-
     //--------------------------------------------------------
     $(document).on('click', '#button', function () {
         $(".card-deck").empty();
@@ -212,8 +194,75 @@ $(document).ready(function () {
     });
 });
 
-
-
 //if the user inputs a number we are looking to give an error message and modal
 //error throwing to terminate array being pushed into and present the modal
 //error catching frm API
+//-----------------------------------------------------------------
+    // $('.trip-advisor-api').append('<br> Attraction Name: ' + response.data[randomAttractions].name);
+    // $('.trip-advisor-api').append('<br>Description: ' + response.data[randomAttractions].description);
+    // $('.trip-advisor-api').append('<br>Rating: ' + response.data[randomAttractions].rating);
+    // $('.trip-advisor-api').append('<br>URL: ' + response.data[randomAttractions].website);
+    // $('.trip-advisor-api').append('<br> ------------------ ');
+//-----------------------------------------------------------------------------
+        // create a copy of the array
+    //        var newArray = [];
+    //        var imageArray = [];
+    //   debugger;
+    //         for(var i=0; i<response.data.length; i++){
+    //             newArray.push(response.data[i])
+    //         }
+    //         // then, each time pull from that array and remove the one you use
+    //         for (var i =0; i < 10; i++)
+    //         {
+    //             if(newArray.length>0) {
+    //                 var index = Math.floor(Math.random() * newArray.length)
+    //                 var randomImage = newArray[index];
+    //                 newArray.splice(index, 1);
+    //             }
+    //         }
+    //         console.log(newArray);
+ //------------------------------------------------------------------------------ 
+ // "x-rapidapi-key": "83c24764bamsh4ab0e0175aae739p1180b7jsn62d3645b374e"  
+ //--------------------------------------------------------------------------------
+ // var checkInput = function(location){
+//     var checkForNumbers = ["0","1","2","3","4","5","6","7","8","9"];
+//     for (var i = 0; i < checkForNumbers.length; i++){
+//         var check = location.includes(checkForNumbers[i]);
+//         if(check === true){
+//             alert("Error");
+//             return false;
+//         }
+//         else {
+//             return true
+//         };
+//     }
+// }
+//------------------------------------------------------
+//------------------------------------------------------------------------------------
+//var iStart = 0; 
+// for (var i = 0; i < 10; i++) {
+        //    for (x of response.data) {
+        //         if (iStart < 10) {
+        //             var randomAttractions = Math.floor(Math.random() * response.data.length);
+        //             //random number without duplication
+        //             if (response.data[randomAttractions].name !== undefined) {
+        //                 console.log(response.data[randomAttractions]);
+        //                 var imageURL = response.data[randomAttractions].photo.images.medium.url;
+        //                 var imageWidth = response.data[randomAttractions].photo.images.medium.width;
+        //                 $('.card-deck2').append(`<div class='card'>
+        //                     <div class='card-body'>
+        //                     <h2 class='card-title' style="text-decoration: underline; color: red" >${response.data[randomAttractions].name}<h5> Rating: ${response.data[randomAttractions].rating}</h5></h2>
+        //                     <p class='card-text'id ="card">
+        //                     <img src="${imageURL}" class="img-fluid" alt="Responsive image">
+        //                     <hr>
+        //                     ${response.data[randomAttractions].description}
+        //                     <br>
+        //                     <hr>
+        //                     <a href="${response.data[randomAttractions].website}">${response.data[randomAttractions].website}</a></p>
+        //                     <hr>
+        //                 </div>`);
+        //             }
+        //         }
+        //         iStart++;
+        //     }
+//--------------------------------------------------
