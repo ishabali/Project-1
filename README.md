@@ -1,5 +1,5 @@
 # Project-1
-Group Project by Julie Banter, Isha Bali, Gentry Hunt, Shelses Yilmaz, and Garrett May 
+Group Project by Julie Banter, Isha Bali, Gentry Hunt, Shelsea Yilmaz, and Garrett May 
 
 --------------
 
