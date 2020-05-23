@@ -7,10 +7,8 @@ $(document).ready(function () {
         $(".display-4").empty();
         $(".card-deck").empty();
         $(".card-deck2").empty();
-        //var location = localStorage.getItem('cities');
         var location = $('#input').val().toUpperCase();
         console.log(location);
-        //if the user inputs a number we are looking to give an error message and modal
         searchHistory.push(location);
         console.log(searchHistory);
         getWeatherData(location);
@@ -42,7 +40,7 @@ $(document).ready(function () {
             getFiveDayForecast(lat, lon);
         }).fail(function (data) {
             console.log( "Ajax failed: " + data['responseText'] );  
-   //        alert("Weather Data Not Found!");   
+            $("#myModal").modal();   
       })
     }
     var getFiveDayForecast = function (lat, lon) {
@@ -145,7 +143,7 @@ $(document).ready(function () {
             "headers": {
                 'Access-Control-Allow-Origin': '*',
                 "x-rapidapi-host": "tripadvisor1.p.rapidapi.com",
-                "x-rapidapi-key": "0cd2c0f9famsh2558fe85925d9e8p19aa40jsn4b596027b6b5"
+                "x-rapidapi-key": "363c7fbecfmshcbe4cfd3ee41b5fp142feajsn760531d33ab1"
             }
         }
         $.ajax(settings).done(function (response) {
@@ -176,7 +174,7 @@ $(document).ready(function () {
                         ${response.data[randomAttractions].description}
                         <br>
                         <hr>
-                        <a href="${response.data[randomAttractions].website}">${response.data[randomAttractions].website}</a></p>
+                        <a href="${response.data[randomAttractions].website}" target="_blank">${response.data[randomAttractions].website}</a></p>
                         <hr>
                     </div>`);
                 }
