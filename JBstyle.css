@@ -1,0 +1,69 @@
+body{
+background-image: url("Vacations-Background3.jpg");
+}
+
+.jumbotron{
+   background-color: white;
+   box-shadow: 1px 1px 10px navy;
+   height:70%;
+   width:115%;
+   margin-top: 20px;
+}
+
+h1, h3{
+    font-family:'Dancing Script', cursive;
+    background-color: rgb(149, 244, 242);
+    color: Navy;
+    text-align: center;
+    padding: 20px;
+    border-radius: 5px;
+    margin-top: 20px;
+    box-shadow: 1px 1px 10px navy;
+}
+h3{
+    width: 115%;
+    margin-top: -70px;
+}
+
+h2{
+    font-family:'Dancing Script', cursive;
+    color: Navy;
+
+}
+
+#bottom{
+    background-color: rgb(149, 244, 242);
+    color: navy;
+    
+}
+
+.card-deck{
+  height: 90%;
+  width: 119%;
+  text-align: center;
+  font-size: small;
+  
+}
+
+.card{
+    box-shadow: 1px 1px 10px navy;
+    width:80%;
+    margin: 20px ;
+}
+h6{
+    font-size: 12px;
+    color:navy;
+}
+.card-deck2{
+    height: 50%;
+    width: 100%;
+    text-align: center;
+    font-size: small;
+    align-content: center;
+    margin-left: 125px;
+}
+    #sidebar-wrapper{
+        background-color: rgb(149, 244, 242);
+        color: navy;
+
+    }
