@@ -102,7 +102,7 @@ $(document).ready(function () {
             "headers": {
                 'Access-Control-Allow-Origin': '*',
                 "x-rapidapi-host": "tripadvisor1.p.rapidapi.com",
-                "x-rapidapi-key": "363c7fbecfmshcbe4cfd3ee41b5fp142feajsn760531d33ab1"
+                "x-rapidapi-key": "cbc079943amsh2bd9f6841eda820p121dd7jsn72f13372ca73"
             }
         }
         $.ajax(settings).done(function (response) {
@@ -143,7 +143,7 @@ $(document).ready(function () {
             "headers": {
                 'Access-Control-Allow-Origin': '*',
                 "x-rapidapi-host": "tripadvisor1.p.rapidapi.com",
-                "x-rapidapi-key": "363c7fbecfmshcbe4cfd3ee41b5fp142feajsn760531d33ab1"
+                "x-rapidapi-key": "cbc079943amsh2bd9f6841eda820p121dd7jsn72f13372ca73"
             }
         }
         $.ajax(settings).done(function (response) {
@@ -167,7 +167,7 @@ $(document).ready(function () {
                     var imageWidth = response.data[randomAttractions].photo.images.medium.width;
                     $('.card-deck2').append(`<div class='card'>
                         <div class='card-body'>
-                        <h2 class='card-title' style="text-decoration: underline; color: red" >${response.data[randomAttractions].name}<h5> Rating: ${response.data[randomAttractions].rating}</h5></h2>
+                        <h2 class='card-title' >${response.data[randomAttractions].name}<h5> Rating: ${response.data[randomAttractions].rating}</h5></h2>
                         <p class='card-text'id ="card">
                         <img src="${imageURL}" class="img-fluid" alt="Responsive image">
                         <hr>
