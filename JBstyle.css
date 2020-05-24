@@ -4,9 +4,9 @@ body{
     .jumbotron{
        background-color: white;
        box-shadow: 1px 1px 10px navy;
-       height:70%;
+       height:80%;
        width:115%;
-       margin-top: 20px;
+       margin-top: 10px;
       
     }
     h1, h3{
@@ -18,10 +18,12 @@ body{
         border-radius: 5px;
         margin-top: 20px;
         box-shadow: 1px 1px 10px navy;
-    }
+        font-size: 60px;
+        }
     h3{
         width: 115%;
         margin-top: -70px;
+        font-size: 40px;
        
     }
     h2, h6{
@@ -42,7 +44,6 @@ body{
     .card{
      box-shadow: 1px 1px 10px navy; 
         width: 100%;
-        margin: 10px ;
        
      } 
     h6{
@@ -51,11 +52,10 @@ body{
     }
     .card-deck2{
         height: 50%;
-        width: 100%;
+        width: 80%;
         text-align: center;
         font-size: small;
-        align-content: center;
-        margin-left: 125px;
+        margin-left: 55px;
        
     }
         #sidebar-wrapper{

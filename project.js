@@ -36,8 +36,8 @@ $(document).ready(function () {
             var icon = response.weather[0].icon
             var lat = response.coord.lat;
             var lon = response.coord.lon;
-            $('.display-4').html(cityName)
-            $('.display-4').append(" " + currentDay);
+            $('.display-4').html(cityName);
+            $('.display-4').append(" (" + currentDay + ")");
             $('.display-4').append(` <img src='http://openweathermap.org/img/wn/${icon}.png' class="img-fluid" alt="Responsive image">`);
             $('.lead').append("Temperature: " + temperature + "°F");
             $('.lead').append('<br>Humidity: ' + humidity + "%");
@@ -45,9 +45,9 @@ $(document).ready(function () {
             getFiveDayForecast(lat, lon);
         }).fail(function (data) {
             console.log("Ajax failed: " + data['responseText']);
-            
+
             if (searchHistory.length > 0) {
-                
+
                 $("#myWeatherModal").modal();
             }
         })
@@ -60,7 +60,7 @@ $(document).ready(function () {
         }).then(function (response) {
             console.log(response.daily[0].uvi);
             for (var i = 1; i < 8; i++) {
-                var nextDay = moment().add(i, 'days').format('L');
+                var nextDay = moment().add(i, 'days').format('MMM Do YYYY');
                 var cardIcon = response.daily[i].weather[0].icon
                 var cardTemp = Math.floor(((response.daily[i].temp.day) - 273.15) * 1.80 + 32);
                 var cardHumidity = response.daily[i].humidity;
@@ -98,7 +98,6 @@ $(document).ready(function () {
             getTripAdvisorData(lastLocation);
         }
     }
-    //--------------------------------------------------------
     var getTripAdvisorData = function (location) {
         //endpoint: locations/search
         var settings = {
@@ -111,7 +110,7 @@ $(document).ready(function () {
             "headers": {
                 'Access-Control-Allow-Origin': '*',
                 "x-rapidapi-host": "tripadvisor1.p.rapidapi.com",
-                "x-rapidapi-key": "cbc079943amsh2bd9f6841eda820p121dd7jsn72f13372ca73"
+                "x-rapidapi-key": "905432c018msh6a3ed62865e9563p1b43e3jsn820a674f2c34"
             }
         }
         $.ajax(settings).done(function (response) {
@@ -126,17 +125,16 @@ $(document).ready(function () {
                     getTripAdvisorData2(cityId);
                 }
                 else {
-                    
+
                     break;
                 }
             }
-            
+
         }).fail(function (data) {
             console.log("Ajax Tripadvisor1 failed - Location Not Found!: " + location);
-            
+
         });
     }
-    //------------------------------------------------------------------------
     // Trip Advisor
     // Endpoint: attractions/ list 
     var getTripAdvisorData2 = function (cityId) {
@@ -145,12 +143,12 @@ $(document).ready(function () {
             "crossDomain": true,
             "cors": true,
             "url": `https://tripadvisor1.p.rapidapi.com/attractions/list?lang=en_US&currency=USD&sort=recommended&lunit=km&location_id=${cityId}`,
-    
+
             "method": "GET",
             "headers": {
                 'Access-Control-Allow-Origin': '*',
                 "x-rapidapi-host": "tripadvisor1.p.rapidapi.com",
-                "x-rapidapi-key": "cbc079943amsh2bd9f6841eda820p121dd7jsn72f13372ca73"
+                "x-rapidapi-key": "905432c018msh6a3ed62865e9563p1b43e3jsn820a674f2c34"
             }
         }
         $.ajax(settings).done(function (response) {
@@ -171,7 +169,6 @@ $(document).ready(function () {
                 if (response.data[randomAttractions].name !== undefined) {
                     console.log(response.data[randomAttractions]);
                     var imageURL = response.data[randomAttractions].photo.images.medium.url;
-                    var imageWidth = response.data[randomAttractions].photo.images.medium.width;
                     $('.card-deck2').append(`<div class='card'>
                         <div class='card-body'>
                         <h2 class='card-title' >${response.data[randomAttractions].name}<h5> Rating: ${response.data[randomAttractions].rating}</h5></h2>
@@ -183,7 +180,9 @@ $(document).ready(function () {
                         <hr>
                         <a href="${response.data[randomAttractions].website}" target="_blank">${response.data[randomAttractions].website}</a></p>
                         <hr>
-                    </div>`);
+                    </div>
+                    </div>
+                    <br>`);
                 }
                 else {
                     iEnd++;
@@ -191,11 +190,10 @@ $(document).ready(function () {
             }
         }).fail(function (data) {
             console.log("Ajax Tripadvisor2 failed - CityId Not Found!: " + cityId);
-             
+
         });
     }
     search();
-    //--------------------------------------------------------
     $(document).on('click', '#button', function () {
         $(".card-deck").empty();
         $(".lead").empty();
