@@ -7,7 +7,6 @@ body{
        height:80%;
        width:115%;
        margin-top: 10px;
-      
     }
     h1, h3{
         font-family:'Dancing Script', cursive;
@@ -24,7 +23,6 @@ body{
         width: 115%;
         margin-top: -70px;
         font-size: 40px;
-       
     }
     h2, h6{
         font-family:'Dancing Script', cursive;
@@ -39,12 +37,10 @@ body{
       width: 119%;
       text-align: center;
       font-size: small;
-      
     }
     .card{
      box-shadow: 1px 1px 10px navy; 
         width: 100%;
-       
      } 
     h6{
         font-size: 12px;
@@ -56,10 +52,8 @@ body{
         text-align: center;
         font-size: small;
         margin-left: 55px;
-       
     }
         #sidebar-wrapper{
             background-color: rgb(149, 244, 242);
             color: navy;
         }
-    

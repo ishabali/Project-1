@@ -10,7 +10,6 @@ $(document).ready(function () {
         $(".display-4").empty();
         $(".card-deck").empty();
         $(".card-deck2").empty();
-
         var location = $('#input').val().toUpperCase();
         console.log(location);
         searchHistory.push(location);
@@ -45,9 +44,7 @@ $(document).ready(function () {
             getFiveDayForecast(lat, lon);
         }).fail(function (data) {
             console.log("Ajax failed: " + data['responseText']);
-
             if (searchHistory.length > 0) {
-
                 $("#myWeatherModal").modal();
             }
         })
@@ -125,14 +122,11 @@ $(document).ready(function () {
                     getTripAdvisorData2(cityId);
                 }
                 else {
-
                     break;
                 }
             }
-
         }).fail(function (data) {
             console.log("Ajax Tripadvisor1 failed - Location Not Found!: " + location);
-
         });
     }
     // Trip Advisor
@@ -143,7 +137,6 @@ $(document).ready(function () {
             "crossDomain": true,
             "cors": true,
             "url": `https://tripadvisor1.p.rapidapi.com/attractions/list?lang=en_US&currency=USD&sort=recommended&lunit=km&location_id=${cityId}`,
-
             "method": "GET",
             "headers": {
                 'Access-Control-Allow-Origin': '*',
@@ -190,7 +183,6 @@ $(document).ready(function () {
             }
         }).fail(function (data) {
             console.log("Ajax Tripadvisor2 failed - CityId Not Found!: " + cityId);
-
         });
     }
     search();
