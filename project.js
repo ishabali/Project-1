@@ -131,7 +131,6 @@ $(document).ready(function () {
         });
     }
     // Trip Advisor
-    // Endpoint: attractions/ list 
     var getTripAdvisorData2 = function (cityId) {
         var settings = {
             "async": true,
