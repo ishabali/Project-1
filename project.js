@@ -41,7 +41,7 @@ $(document).ready(function () {
             $('.lead').append("Temperature: " + temperature + "°F");
             $('.lead').append('<br>Humidity: ' + humidity + "%");
             $('.lead').append('<br>Windspeed: ' + windspeed + "MPH");
-            getFiveDayForecast(lat, lon);
+            getSevenDayForecast(lat, lon);
         }).fail(function (data) {
             console.log("Ajax failed: " + data['responseText']);
             if (searchHistory.length > 0) {
@@ -49,7 +49,7 @@ $(document).ready(function () {
             }
         })
     }
-    var getFiveDayForecast = function (lat, lon) {
+    var getSevenDayForecast = function (lat, lon) {
         var queryURL2 = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&appid=${APIKey}`
         $.ajax({
             url: queryURL2,
@@ -65,7 +65,8 @@ $(document).ready(function () {
              <div class='card-body'>
                  <h6 class='card-title'>${nextDay}</h6>
                  <p class='card-text'id ="card${i}"> 
-                 <img src='http://openweathermap.org/img/wn/${cardIcon}.png' class="img-fluid" alt="Responsive image"> <br>${cardTemp}°F <br> ${cardHumidity}% </p>
+                 <img src='http://openweathermap.org/img/wn/${cardIcon}.png' class="img-fluid" alt="Responsive image"> <br>${cardTemp}°F
+                  <br> ${cardHumidity}% </p>
              </div>`);
             }
             var uvi = response.daily[0].uvi
