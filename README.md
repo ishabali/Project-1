@@ -5,6 +5,7 @@ Group Project by:
      Julianne Bainter, Isha Bali, Gentry Hunt, Shelsea Yilmaz, and Garrett May 
 
 View the deployed ‘Dream Your Vacation’ App at: https://ice-code-nw-2020.github.io/Project-1/
+
 Github (Source Code): https://github.com/Ice-Code-NW-2020/Project-1
 
 Presentation: https://docs.google.com/presentation/d/16xVBVbeUno1KA_uCONFhMQVvGGaDG3cL7PU8L33M824/edit#slide=id.p
